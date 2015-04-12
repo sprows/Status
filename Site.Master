@@ -1,0 +1,86 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="SC.Site" %>
+
+<%@ Register src="controls/header.ascx" tagname="header" tagprefix="uc1" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="https://www.facebook.com/2008/fbml">
+<head runat="server">
+  <title>StatusHistory</title>
+
+    <script type="text/javascript">
+      var GB_ROOT_DIR = "./greybox/";
+    </script>
+
+    <script type="text/javascript" src="greybox/AJS.js"></script>
+    <script type="text/javascript" src="greybox/AJS_fx.js"></script>
+    <script type="text/javascript" src="greybox/gb_scripts.js"></script>
+
+    <link href="greybox/gb_styles.css" rel="stylesheet" type="text/css" media="all" />
+
+<link rel="stylesheet" href="css/screen.css" type="text/css" media="screen, projection"/>
+<link rel="stylesheet" href="css/print.css" type="text/css" media="print"/>
+<link rel="stylesheet" href="css/grid.css" type="text/css" media="screen, projection"/>
+<link rel="stylesheet" id="defaultStyle" href="css/style.css" type="text/css" media="screen, projection" />
+ <meta property="og:title" content="StatusHistory.com"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="http://www.StatusHistory.com/"/>
+    <meta property="og:image" content="http://www.statushistory.com/img/StatusH.jpg"/>
+    <meta property="og:site_name" content="StatusHistory.com"/>
+    <meta property="fb:admins" content="767233921"/>
+    <meta property="og:description"
+          content="Search, Filter, Analyze your Past Facebook Status updates.  Discover who is your most active Facebook friend? What status update generated the most 'Likes'. How many Status updates have I posted in the past two years? "/>
+
+<script type="text/javascript">
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-2623536-3']);
+    _gaq.push(['_trackPageview']);
+
+    (function () {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+</script>
+
+</head>
+
+
+<body>
+    <form id="MyForm" runat="server">
+
+       
+    <div class="header">
+    <div class="container">
+        <h1>StatusHistory.com</h1>
+        <uc1:header ID="header1" runat="server" />
+    </div>
+    </div>
+
+    
+        <div id="page">
+            <div class="wrapper">
+                <div class="container">
+                    <div class="span-24 col1">  
+                    <asp:ContentPlaceHolder ID="ContentBody" runat="server">
+          
+                    </asp:ContentPlaceHolder>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <div class="footer">
+        <div class="container"><div style="text-align: center;" class="span-24 content">© StatusHistory.com 2011 <a href="http://www.StatusHistory.com" title="StatusHistory">StatusHistory</a></div> </div>
+    </div>
+
+    </form>
+</body>
+        <script type="text/javascript">
+            FB.init({ appId: '<%=ConfigurationManager.AppSettings["ApplicationKey"] %>', status: true, cookie: true,
+                xfbml: true, oauth: true
+            });
+
+        </script>
+</html>
