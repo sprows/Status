@@ -1,4 +1,7 @@
-﻿var globalArray = [];
+﻿
+$('#MyHeader').hide();
+
+var globalArray = [];
 
 var CommentArray = new Array();
 var LikeArray = [];
@@ -12,7 +15,7 @@ var AlreadyPopulatedAccounts = '';
 var pager;
 var DoICancel;
 
-var FBWindow;fgh
+var FBWindow;
 
 
 document.addEventListener("backbutton", BackButtonPressed, false);
@@ -188,6 +191,7 @@ function Pager(itemsPerPage, theArray) {
 }
 
 function DisplayLoader() {
+
     var $this = $(this),
         theme = $this.jqmData("theme") || $.mobile.loader.prototype.options.theme,
         msgText = $this.jqmData("msgtext") || $.mobile.loader.prototype.options.text,
@@ -212,6 +216,7 @@ function DisplayPages() {
     PopulateAccounts();
     $('#PagesLoginBlock').hide();
     $('#PagesBlock').show();
+    $('#MyHeader').show();
 
 
 }
@@ -567,6 +572,7 @@ function DoneWithLoading() {
     //Hide
     HideLoader();
     document.getElementById("LoginBlock").style.display = 'none';
+
     $("#SearchStuff").hide();
 
     //Show Menu
@@ -898,7 +904,9 @@ function TryInner(url) {
 
 function TryThis() {
 
+
     $('#LoginBlock').hide();
+    $('#MyHeader').hide();
     DisplayLoader();
 
     DoICancel = false;
@@ -913,7 +921,7 @@ function TryThis() {
 
             //console.log('Before parse');
             //console.log('The length is: ' + data.data.length);
-
+            $('#MyHeader').show();
 
             var StatusArray = CreateStatusArray(data);
             globalArray = globalArray.concat(StatusArray);

@@ -18,9 +18,27 @@
         <meta property="og:description"
           content="Who are your Facebook friends that interact with your Facebook page the most? StatusHistory.com enables you to find out your Facebook top 10 commentors and top 10 likers.  You can also Scroll/Search through your past Facebook statuses"/>
          
-          <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" />
+       
+
+        <link rel="stylesheet" href="css/skel.css" />
+		<link rel="stylesheet" href="css/styleR.css" />
+		<link rel="stylesheet" href="css/style-xlarge.css" />
+        
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<!--[if lte IE 8]><script src="css/ie/html5shiv.js"></script><![endif]-->
+		<script src="js/jquery.min.js"></script>
+		<script src="js/jquery.scrolly.min.js"></script>
+		<script src="js/skel.min.js"></script>
+		<script src="js/init.js"></script>
+        <!--[if lte IE 9]><link rel="stylesheet" href="css/ie/v9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
+
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" />
 	    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 	    <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+
         
         <style>
         .content .ui-icon-searchfield::after{
@@ -66,14 +84,14 @@
                 return false;
             }
 
-            function FacebookPopup() {
-            
+        function FacebookPopup() {
+
             FB.ui({
                 method: 'share',
                 href: 'http://www.statushistory.com/mobile.aspx/',
-                }, function(response){});
-            }
-
+            }, function (response) { });
+        }
+        ;
 </script>
         <script type="text/javascript">
 
@@ -148,6 +166,7 @@
                  <script>
                      // This is called with the results from from FB.getLoginStatus().
                      function statusChangeCallback(response) {
+
                          console.log('statusChangeCallback');
                          console.log(response);
                          // The response object is returned with a status field that lets the
@@ -179,6 +198,7 @@
                      // Button.  See the onlogin handler attached to it in the sample
                      // code below.
                      function checkLoginState() {
+
                          FB.getLoginStatus(function (response) {
                              statusChangeCallback(response);
                          });
@@ -269,10 +289,141 @@
 </div>
 
                  <div data-role="page" class="jqm-demos" data-quicklinks="true">
-                 <div data-role="header">
-		            <h1>StatusHistory</h1>
+                 <div id= "MyHeader" data-role="header" style="background-color: #059;c">
+		            <h1 style="color:white;">StatusHistory</h1>
 	            </div><!-- /header -->
-                  <div data-role="content">
+                 
+                 <div id="LoginBlock"> 
+                      
+		            <!-- Header -->
+			        <section id="header">
+				<div class="inner">
+					<span class="icon major fa-cloud"></span>
+					<h1><strong>StatusHistory.com</strong><br />
+                        </h1>
+					<p><strong>StatusHistory.com is a utility that allows you to find out friends that interact with your Facebook page the most.</strong></p>
+                    <p>Find out your Facebook top commentors and top likers. <br />
+                        Search/Scroll through your past Facebook statuses.<br/>
+                       Quickly find old posts to delete</p> 
+                  
+                    <ul class="actions">
+						<li><a href="#Demo1" class="button scrolly">How it works</a></li>
+					</ul>
+				</div>
+			</section>
+                    <!-- Two -->
+                    <section id="Demo1" class="main style2">
+            <div class="container" align="center">
+               
+                <div class="row 150%">
+                    <div class="6u 12u$(medium)">
+                        <header>
+                            <h2>Find out who commented on your Facebook Statuses the most</h2>
+                        </header>
+                    </div>
+                    <div class="6u$ 12u$(medium) important(medium)">
+                        <span class="image"><img src="images/Demo1.PNG" alt="" /></span>
+                    </div>
+                </div>
+                <br /><br />
+                <div class="row 150%">
+                    <div class="6u 12u$(medium)">
+                        <header>
+                            <h2>Scroll through all of your past Facebook Statuses</h2>
+                        </header>
+                    </div>
+                    <div class="6u$ 12u$(medium) important(medium)">
+                        <span class="image"><img src="images/Demo2.PNG" alt="" /></span>
+                    </div>
+                </div>
+                <br /><br />
+                <div class="row 150%">
+                    <div class="6u 12u$(medium)">
+                        <header>
+                            <h2>Quickly search for keywords in your Facebook status history</h2>
+                        </header>
+                    </div>
+                    <div class="6u$ 12u$(medium) important(medium)">
+                        <span class="image"><img src="images/Demo3.PNG" alt="" /></span>
+                    </div>
+
+                 </div>
+                <br /><br />
+                <div class="row 150%">
+                    <div class="6u 12u$(medium)">
+                        <header>
+                            <h2>Perform all of the the same features for one of your Fan pages</h2>
+                        </header>
+                    </div>
+                    <div class="6u$ 12u$(medium) important(medium)">
+                        <span class="image"><img src="images/Demo4.PNG" alt="" /></span>
+                    </div>
+
+                </div>
+                <br /><br />
+                <h2>Log In to get started</h2>
+                It may take a few minutes to retrieve your data<br />depending on how many statuses you have.<br /><br />
+                  <fb:login-button scope="user_posts,email" data-size="xlarge" onlogin="checkLoginState();">
+                  </fb:login-button>
+
+                <br /><br />
+                <ul class="actions">
+                    <li><a href="#press" class="button scrolly">What they are saying</a></li>
+                </ul>
+            </div>
+        </section>
+		            <!-- One -->
+			        <section id="press" class="main style1">
+				<div class="container">
+					<div class="row 150%">
+						<div class="6u 12u$(medium)">
+							<header class="major">
+								<h2>"Find out who your top 10 Facebook stalkers.  Not only is this beneficial to the average Joe, but it can also be a big help with brands and companies"</h2>
+							</header>
+						</div>
+						<div class="6u$ 12u$(medium) important(medium)">
+                            <span class="image fit">
+                                <a target="_blank" href="http://www.adweek.com/socialtimes/status-history/437277?red=af"><img src="images/SocialTimes.PNG" alt="" /></a>
+                            </span>
+						</div>
+					</div>
+				</div>
+			</section>
+
+                    <section id="promo" class="main style1">
+            <div class="container">
+                <div class="row 150%">
+                    <div class="6u 12u$(medium)">
+                        <header class="major">
+                            <h2>"Facebook: how to find an old post you made.  'Liked' by over 3 million facebook users"</h2>
+                        </header>
+                    </div>
+                    <div class="6u$ 12u$(medium) important(medium)">
+                        <span class="image fit"><a target="_blank" href="http://www.tecmundo.com.br/tutorial/60973-facebook-fazer-encontrar-post-antigo-voce.htm"><img src="images/techmundo.jpg" alt="" /></a></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+		            <!-- Footer -->
+			        <section id="footer">
+				<ul class="icons">
+					<li><a href="#" class="icon alt fa-twitter"><span class="label">Twitter</span></a></li>
+					<li><a href="#" class="icon alt fa-facebook"><span class="label">Facebook</span></a></li>
+					<!-- <li><a href="#" class="icon alt fa-instagram"><span class="label">Instagram</span></a></li>
+					<li><a href="#" class="icon alt fa-github"><span class="label">GitHub</span></a></li>
+					<li><a href="#" class="icon alt fa-envelope"><span class="label">Email</span></a></li>-->
+				</ul>
+				<ul class="copyright">
+					<li>&copy; StatusHistory.com</li><li>2015</li>
+				</ul>
+			</section>
+
+                </div>
+                     
+                     
+                     
+                 <div data-role="content">
                   
                   <span id="SearchStuff">
                         What do you want to search for?<span id="SearchBlock"><input type="search" name="search" id="search-basic" value="" /></span>
@@ -288,47 +439,7 @@
                  <div align="center" id="pageNavPosition"></div> 
                  <ul id="MyListView" data-role="listview" data-inset="true  class="ui-listview ui-listview-inset ui-corner-all ui-shadow">
                  </ul>
-                 <%--<div id="cmtLike" class="fb-like" data-href="http://www.facebook.com/pages/StatusHistorycom/226476307375941" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>--%>
-                 <div id="LoginBlock" align="center">
-                        <!--<h1>StatusHistory.com</h1>-->
-                        <img src="img/Mag173x173.png" /><br /><br />
-                        <b>Who are your Facebook friends that interact with your Facebook page the most?</b><br /><br />StatusHistory.com enables you to find out your Facebook top 10 commentors and top 10 likers.  You can also Scroll/Search through your past Facebook statuses.
-                        <br /> <br />
-                        <fb:login-button scope="user_posts,email" size="large" onlogin="checkLoginState();">
-                            Get Status History
-                        </fb:login-button>
-                        <br />
-                        <br />
-                        <br />
-                        <b>Find out your top 10s</b><br /><br />
-                        <img src="img/info.png" />
-                        <br />
-                        <br />
-                        <br />
-                        <b>Scroll through all of your past Posts</b><br /><br />
-                        <img src="img/Status.png" />
-                        <br />
-                        <br />
-                        <br />
-                        <b>Keyword search your Posts</b><br /><br />
-                        <img src="img/Search.png" />
-                        <br />
-                        <br />
-                        <br />
-                        <b>Do the same features as your Fan Page</b><br /><br />
-                        <img src="img/Settings.png" />
-
-                            
- <br /><br />
-	            <div align="center"><a href="http://www.statushistory.com/privacy.html" >[Privacy Policy]</a></div>
-
- <!--<p>Name: <span id="userName"></span></p>
-	           
-                            <button class="btn btn-block" onclick="getInfo()">Get My Info</button><br />
-                            <button class="btn btn-block" onclick="login()">Get My Status</button>-->
-                <br /><br />
-                                       
-                </div>
+                
                 <div id="SettingsDisplay">
                     Logged in as: <b><span id="userName"></span></b>
                     <br />
