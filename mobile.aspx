@@ -11,7 +11,7 @@
         <meta property="og:title" content="StatusHistory.com"/>
         <meta property="og:type" content="website"/>
         <meta property="og:url" content="http://www.StatusHistory.com/"/>
-        <meta property="og:image" content="http://www.statushistory.com/img/Mag173x173.png"/>
+        <meta property="og:image" content="http://www.statushistory.com/cloud.png"/>
         <meta property="og:site_name" content="StatusHistory.com"/>
         <meta property="fb:admins" content="767233921"/>
         <meta property="fb:app_id" content="767233921" />
@@ -289,8 +289,8 @@
 </div>
 
                  <div data-role="page" class="jqm-demos" data-quicklinks="true">
-                 <div id= "MyHeader" data-role="header" style="background-color: #059;c">
-		            <h1 style="color:white;">StatusHistory</h1>
+                 <div id= "MyHeader" data-role="header" style="background-color: #38c;text-shadow:none;font-family:sans-serif;fon">
+		            <h1 style="color:white;">StatusHistory.com</h1>
 	            </div><!-- /header -->
                  
                  <div id="LoginBlock"> 
@@ -299,7 +299,7 @@
 			        <section id="header">
 				<div class="inner">
 					<span class="icon major fa-cloud"></span>
-					<h1><strong>StatusHistory.com</strong><br />
+					<h1><strong>StatusHistory</strong><br />
                         </h1>
 					<p><strong>StatusHistory.com is a utility that allows you to find out friends that interact with your Facebook page the most.</strong></p>
                     <p>Find out your Facebook top commentors and top likers. <br />
@@ -318,14 +318,14 @@
                 <div class="row 150%">
                     <div class="6u 12u$(medium)">
                         <header>
-                            <h2>Find out who commented on your Facebook Statuses the most</h2>
+                            <h2>Find out who commented on your statuses the most</h2>
                         </header>
                     </div>
                     <div class="6u$ 12u$(medium) important(medium)">
                         <span class="image"><img src="images/Demo1.PNG" alt="" /></span>
                     </div>
                 </div>
-                <br /><br />
+                <br /><br /> <br /><br /> <br /><br /> <br /><br /><br /><br /> <br /><br />
                 <div class="row 150%">
                     <div class="6u 12u$(medium)">
                         <header>
@@ -378,7 +378,7 @@
 					<div class="row 150%">
 						<div class="6u 12u$(medium)">
 							<header class="major">
-								<h2>"Find out who your top 10 Facebook stalkers.  Not only is this beneficial to the average Joe, but it can also be a big help with brands and companies"</h2>
+								<h2>"Find out your top 10 Facebook stalkers ... not only is this beneficial to the average Joe, but it can also be a big help with brands and companies"</h2>
 							</header>
 						</div>
 						<div class="6u$ 12u$(medium) important(medium)">
@@ -395,7 +395,7 @@
                 <div class="row 150%">
                     <div class="6u 12u$(medium)">
                         <header class="major">
-                            <h2>"Facebook: how to find an old post you made.  'Liked' by over 3 million facebook users"</h2>
+                            <h2>"How to find an old Facbook Post.  'Liked' by over 3 million facebook users"</h2>
                         </header>
                     </div>
                     <div class="6u$ 12u$(medium) important(medium)">
@@ -408,14 +408,14 @@
 		            <!-- Footer -->
 			        <section id="footer">
 				<ul class="icons">
-					<li><a href="#" class="icon alt fa-twitter"><span class="label">Twitter</span></a></li>
-					<li><a href="#" class="icon alt fa-facebook"><span class="label">Facebook</span></a></li>
+					<li><a href="https://www.twitter.com" class="icon alt fa-twitter"><span class="label">Twitter</span></a></li>
+					<li><a href="https://www.facebook.com/StatusHistory" class="icon alt fa-facebook"><span class="label">Facebook</span></a></li>
 					<!-- <li><a href="#" class="icon alt fa-instagram"><span class="label">Instagram</span></a></li>
 					<li><a href="#" class="icon alt fa-github"><span class="label">GitHub</span></a></li>
 					<li><a href="#" class="icon alt fa-envelope"><span class="label">Email</span></a></li>-->
 				</ul>
 				<ul class="copyright">
-					<li>&copy; StatusHistory.com</li><li>2015</li>
+					<li><a href="http://www.statushistory.com/privacy.html">Privacy</a></li><li><a href="http://www.statushistory.com/terms.html">Terms</a></li><li>&copy; StatusHistory.com</li><li>2015</li>
 				</ul>
 			</section>
 
