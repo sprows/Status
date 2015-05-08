@@ -157,6 +157,7 @@
     <Content Include="PageMethods.js" />
     <Content Include="privacy.html" />
     <Content Include="Status.aspx" />
+    <Content Include="terms.html" />
     <Content Include="Test.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
