@@ -203,7 +203,7 @@ function DisplayLoader() {
         textVisible: true,
         theme: 'b',
         textonly: textonly,
-        html: '<div align="center"><img src="http://www.statushistory.com/img/smallloader.gif"><br/><h1><span id="myCount">0</span> statuses retrieved</h1><br\><button class="btn btn-block" onclick="CancelMe();">Cancel</button></div>'
+        html: '<div align="center"><img src="http://www.statushistory.com/img/smallloader.gif"><br/><h1 style="text-shadow:none;color:white"><span id="myCount">0</span> statuses retrieved</h1><br\><button class="btn btn-block" onclick="CancelMe();"><span style="text-shadow:none;color:white">Cancel</span></button></div>'
     });
 }
 
@@ -520,7 +520,7 @@ function SortLikes() {
     for (c = 0; c < sortedLikes.length; c++) {
 
         //console.log('loop: ' + i);
-        html += '<li><table><tr><td><img height="65" width="65" style="vertical-align:middle;" src="http://graph.facebook.com/' + sortedLikes[c].id + '/picture?type=normal" alt="France"></td><td>' + sortedLikes[c].name + ' liked <b>' + sortedLikes[c].count + '</b> times</td></tr></table></li>';
+        html += '<li><table><tr><td><img height="65" width="65" style="vertical-align:middle;" src="http://graph.facebook.com/' + sortedLikes[c].id + '/picture?type=normal" alt="France"></td><td>' + sortedLikes[c].name + ' liked <span style="font-weight: bold;">' + sortedLikes[c].count + '</span> times</td></tr></table></li>';
         if (c > 10) {
             break;  //bail after 10
         }
@@ -556,7 +556,7 @@ function SortComments() {
     for (c = 0; c < sortedComments.length; c++) {
 
         //console.log('loop: ' + i);
-        html += '<li><table><tr><td><img height="65" width="65" style="vertical-align:middle;" src="http://graph.facebook.com/' + sortedComments[c].id + '/picture?type=normal" alt="France"></td><td>' + sortedComments[c].name + ' commented <b>' + sortedComments[c].count + '</b> times</td></tr></table></li>';
+        html += '<li><table><tr><td><img height="65" width="65" style="vertical-align:middle;" src="http://graph.facebook.com/' + sortedComments[c].id + '/picture?type=normal" alt="France"></td><td>' + sortedComments[c].name + ' commented <span style="font-weight: bold;">' + sortedComments[c].count + '</span> times</td></tr></table></li>';
         if (c > 10) {
             break;  //bail after 10
         }
@@ -880,11 +880,11 @@ function TryInner(url) {
                                 $.get("mystats.aspx?id=" + TheUserID + "&c=" + TotalComments + "&l=" + TotalLikes + "&p=" + globalArray.length + "&g=good");
 
                             },
-                            error: function (ErrorResponse) { console.log('error2: ' + JSON.stringify(ErrorResponse)); DoneWithLoading(); }
+                            error: function (ErrorResponse) { console.log('error2: ' + JSON.stringify(ErrorResponse)); DoICancel = true; TryInner(url.split('&until')[0]); }
                         });
 
                     },
-                    error: function (ErrorResponse) { console.log('error3: ' + JSON.stringify(ErrorResponse)); DoneWithLoading(); }
+                    error: function (ErrorResponse) { console.log('error3: ' + JSON.stringify(ErrorResponse)); DoICancel = true; TryInner(url.split('&until')[0]); }
                 });
 
 
@@ -896,7 +896,7 @@ function TryInner(url) {
             }
 
         },
-        error: function (ErrorResponse) { console.log('error1: ' + JSON.stringify(ErrorResponse)); DoneWithLoading(); }
+        error: function (ErrorResponse) { console.log('error1: ' + JSON.stringify(ErrorResponse)); DoICancel = true; TryInner(url.split('&until')[0]); }
     });
 
 }
@@ -914,7 +914,7 @@ function TryThis() {
     openFB.api({
         path: '/' + SelectedUser + '/posts',
         params: {
-            limit: '25'
+            limit: '50'
         },
         success: function (data) {
             //console.log(JSON.stringify(data));
