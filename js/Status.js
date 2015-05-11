@@ -495,6 +495,18 @@ function dynamicSort(property) {
     }
 }
 
+function dynamicSort2(property) {
+    var sortOrder = 1;
+    if (property[0] === "-") {
+        sortOrder = -1;
+        property = property.substr(1);
+    }
+    return function (a, b) {
+        var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+        return result * sortOrder;
+    }
+}
+
 
 
 function SortLikes() {
@@ -560,7 +572,42 @@ function SortComments() {
         if (c > 10) {
             break;  //bail after 10
         }
-        //console.log('name: ' + sortedComments[c].name + ' count: ' + sortedComments[c].count);
+        console.log('name: ' + sortedComments[c].name + ' count: ' + sortedComments[c].count);
+    }
+
+    list.innerHTML = html;
+
+}
+
+function SortGhosts() {
+
+    //Sort Comments
+    var sortedGhosts = [];
+
+    TotalComments = 0;
+
+    for (var key in CommentArray) {
+        var MyComment = CommentArray[key];
+
+        TotalComments = TotalComments + MyComment.count;
+        sortedGhosts.push(MyComment);
+    }
+
+    sortedGhosts.sort(dynamicSort2("count"));
+    //We are done at this point
+
+    //This just prints them out
+    var list = document.getElementById('GhostFriends');
+    var html = '';
+
+    for (c = 0; c < sortedGhosts.length; c++) {
+
+        //console.log('loop: ' + i);
+        html += '<li><table><tr><td><img height="65" width="65" style="vertical-align:middle;" src="http://graph.facebook.com/' + sortedGhosts[c].id + '/picture?type=normal" alt="France"></td><td>' + sortedGhosts[c].name + ' commented <span style="font-weight: bold;">' + sortedGhosts[c].count + '</span> times</td></tr></table></li>';
+        if (c > 30) {
+            break;  //bail after 10
+        }
+        console.log('Ghost name: ' + sortedGhosts[c].name + ' Ghost count: ' + sortedGhosts[c].count);
     }
 
     list.innerHTML = html;
@@ -864,6 +911,7 @@ function TryInner(url) {
                         FriendsCount = data.data.length;
                         SortComments();
                         SortLikes();
+                        SortGhosts();
 
                         console.log(Object.keys(CommentArray).length + ' out of ' + FriendsCount + ' friends commented on one of your status updates');
                         console.log(Object.keys(LikeArray).length + ' out of ' + FriendsCount + ' friends liked on one of your status updates');
