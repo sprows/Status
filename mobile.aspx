@@ -299,12 +299,13 @@
 			        <section id="header">
 				<div class="inner">
 					<span class="icon major fa-cloud"></span>
-					<h1><strong>StatusHistory</strong><br />
+					<h1><strong>StatusHistory.com</strong><br />
                         </h1>
-					<p><strong>StatusHistory.com is a utility that allows you to find out friends that interact with your Facebook page the most.</strong></p>
+					<p><h3>StatusHistory.com is a utility that allows you to find out how friends interact with your Facebook page.</h3></p>
+                    
                     <p>Find out your Facebook top commentors and top likers. <br />
-                        Search/Scroll through your past Facebook statuses.<br/>
-                       Quickly find old posts to delete</p> 
+                        Determine your 'Ghost Friends' or friends who do not interact with your profile <br />
+                        Search/Scroll through your past Facebook statuses.</p> 
                   
                     <ul class="actions">
 						<li><a href="#Demo1" class="button scrolly">How it works</a></li>
@@ -476,6 +477,9 @@
                     </ul>
                     <h3>Top 10 Likers</h3>
                     <ul id="TopLikers" data-role="listview" data-inset="true">
+                    </ul>
+                     <h3>Ghost Friends</h3>
+                    <ul id="GhostFriends" data-role="listview" data-inset="true">
                     </ul>
                       <div align="center"><a href="#" onclick="FacebookPopup();"><img src="img/facebook.png" /></a> <a href="#" onclick="TwitterPopup();"><img src="img/Twitter.png" class="twitter-share-button" /></a></div>
                 </div>
