@@ -472,6 +472,8 @@
                 </div>
 
                 <div id="info">
+                     <div align="center"><a href="#" onclick="FacebookPopup();"><img src="img/facebook.png" /></a> <a href="#" onclick="TwitterPopup();"><img src="img/Twitter.png" class="twitter-share-button" /></a></div>
+                     <br />
                     <h3>Top 10 commentors</h3>
                     <ul id="TopCommentors" data-role="listview" data-inset="true">
                     </ul>
