@@ -88,10 +88,23 @@
 
             FB.ui({
                 method: 'share',
-                href: 'http://www.statushistory.com/mobile.aspx/',
+                href: 'http://www.statushistory.com',
             }, function (response) { });
         }
+
+        function FacebookShare(desc) {
+
+            FB.ui({
+                method: 'feed',
+                link: 'http://www.statushistory.com',
+                picture: 'http://www.statushistory.com/img/Mag173x173.png',
+                caption: 'Find out how friends interact with your Facebook page',
+                description: desc,
+            }, function (response) { });
+
+        }
         ;
+
 </script>
         <script type="text/javascript">
 
@@ -326,7 +339,7 @@
                         <span class="image"><img src="images/Demo1.PNG" alt="" /></span>
                     </div>
                 </div>
-                <br /><br /> <br /><br /> <br /><br /> <br /><br /><br /><br /> <br /><br />
+               <br /><br />
                 <div class="row 150%">
                     <div class="6u 12u$(medium)">
                         <header>
@@ -363,7 +376,8 @@
                 </div>
                 <br /><br />
                 <h2>Log In to get started</h2>
-                It may take a few minutes to retrieve your data<br />depending on how many statuses you have.<br /><br />
+                It may take a few minutes to retrieve your data<br />depending on how many statuses you have.
+                <br /><br />
                   <fb:login-button scope="user_posts,email" data-size="xlarge" onlogin="checkLoginState();">
                   </fb:login-button>
 
@@ -445,13 +459,13 @@
                     Logged in as: <b><span id="userName"></span></b>
                     <br />
                     <div id="PagesLoginBlock" align="center">
-                    <br />
+                   <%-- <br />
                     Do you want to find out your Facebook top 10 commentors and top 10 likers of your <b>Facebook fan pages</b> you administer?<br /><br />
 
                     <fb:login-button scope="manage_pages" size="large" onlogin=" DisplayPages();">
                             Read Fan Pages
                         </fb:login-button>
-                        <br /><br />
+                        <br /><br />--%>
                     </div>
                     <div id="PagesBlock">
                      <div class="ui-field-contain">
@@ -474,6 +488,9 @@
                 <div id="info">
                      <div align="center"><a href="#" onclick="FacebookPopup();"><img src="img/facebook.png" /></a> <a href="#" onclick="TwitterPopup();"><img src="img/Twitter.png" class="twitter-share-button" /></a></div>
                      <br />
+                     <h3>Key Stats</h3>
+                    <ul id="MyStats" data-role="listview" data-inset="true">
+                    </ul>
                     <h3>Top 10 commentors</h3>
                     <ul id="TopCommentors" data-role="listview" data-inset="true">
                     </ul>
