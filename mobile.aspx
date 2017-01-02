@@ -11,16 +11,34 @@
         <meta property="og:title" content="StatusHistory.com"/>
         <meta property="og:type" content="website"/>
         <meta property="og:url" content="http://www.StatusHistory.com/"/>
-        <meta property="og:image" content="http://www.statushistory.com/img/Mag173x173.png"/>
+        <meta property="og:image" content="http://www.statushistory.com/cloud.png"/>
         <meta property="og:site_name" content="StatusHistory.com"/>
         <meta property="fb:admins" content="767233921"/>
         <meta property="fb:app_id" content="767233921" />
         <meta property="og:description"
-          content="Who are your Facebook friends that interact with your Facebook page the most? StatusHistory.com enables you to find out your Facebook top 10 commentors and top 10 likers.  You can also Scroll/Search through your past Facebook statuses"/>
+          content="Who is stalking you on Facebook? StatusHistory.com enables you to find out your Facebook top 10 commentors and top 10 likers.  You can also Scroll/Search through your past Facebook statuses"/>
          
-          <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" />
+       
+
+        <link rel="stylesheet" href="css/skel.css" />
+		<link rel="stylesheet" href="css/styleR.css" />
+		<link rel="stylesheet" href="css/style-xlarge.css" />
+        
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<!--[if lte IE 8]><script src="css/ie/html5shiv.js"></script><![endif]-->
+		<script src="js/jquery.min.js"></script>
+		<script src="js/jquery.scrolly.min.js"></script>
+		<script src="js/skel.min.js"></script>
+		<script src="js/init.js"></script>
+        <!--[if lte IE 9]><link rel="stylesheet" href="css/ie/v9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
+
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" />
 	    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 	    <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+
         
         <style>
         .content .ui-icon-searchfield::after{
@@ -63,16 +81,29 @@
 
             window.open(url, 'twitter', opts);
 
-                return false;
-            }
+            return false;
+        }
 
-            function FacebookPopup() {
-            
+        function FacebookPopup() {
+
             FB.ui({
                 method: 'share',
-                href: 'http://www.statushistory.com/mobile.aspx/',
-                }, function(response){});
-            }
+                href: 'http://www.statushistory.com',
+            }, function (response) { });
+        }
+
+        function FacebookShare(desc) {
+
+            FB.ui({
+                method: 'feed',
+                link: 'http://www.statushistory.com',
+                picture: 'http://www.statushistory.com/img/Mag173x173.png',
+                caption: 'Find out how friends interact with your Facebook page',
+                description: desc,
+            }, function (response) { });
+
+        }
+        ;
 
 </script>
         <script type="text/javascript">
@@ -136,11 +167,34 @@
                 alert(error.message);
             }
 
-            
-          
+
+
 
         </script>
-        <title>StatusHistory.com</title>
+        <script>
+            window.fbAsyncInit = function () {
+                FB.Event.subscribe(
+                  'ad.loaded',
+                  function (placementId) {
+                      console.log('Audience Network ad loaded');
+                  }
+                );
+                FB.Event.subscribe(
+                  'ad.error',
+                  function (errorCode, errorMessage, placementId) {
+                      console.log('Audience Network error (' + errorCode + ') ' + errorMessage);
+                  }
+                );
+            };
+            (function (d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = "//connect.facebook.net/en_US/sdk/xfbml.ad.js#xfbml=1&version=v2.5&appId=137162329692959";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+    </script>
+    <title>StatusHistory.com</title>
 </head>
 <body>
            <div class="app">
@@ -148,6 +202,7 @@
                  <script>
                      // This is called with the results from from FB.getLoginStatus().
                      function statusChangeCallback(response) {
+
                          console.log('statusChangeCallback');
                          console.log(response);
                          // The response object is returned with a status field that lets the
@@ -179,6 +234,7 @@
                      // Button.  See the onlogin handler attached to it in the sample
                      // code below.
                      function checkLoginState() {
+
                          FB.getLoginStatus(function (response) {
                              statusChangeCallback(response);
                          });
@@ -192,6 +248,19 @@
                              xfbml: true,  // parse social plugins on this page
                              version: 'v2.0' // use version 2.0
                          });
+
+                         FB.Event.subscribe(
+                             'ad.loaded',
+                             function (placementId) {
+                                 console.log('Audience Network ad loaded');
+                             }
+                           );
+                         FB.Event.subscribe(
+                           'ad.error',
+                           function (errorCode, errorMessage, placementId) {
+                               console.log('Audience Network error (' + errorCode + ') ' + errorMessage);
+                           }
+                         );
 
                          // Now that we've initialized the JavaScript SDK, we call 
                          // FB.getLoginStatus().  This function gets the state of the
@@ -211,47 +280,47 @@
 
                      };
 
-                     // Load the SDK asynchronously
-                     (function (d, s, id) {
-                         var js, fjs = d.getElementsByTagName(s)[0];
-                         if (d.getElementById(id)) return;
-                         js = d.createElement(s); js.id = id;
-                         js.src = "//connect.facebook.net/en_US/sdk.js";
-                         fjs.parentNode.insertBefore(js, fjs);
-                     } (document, 'script', 'facebook-jssdk'));
+                         // Load the SDK asynchronously
+                         (function (d, s, id) {
+                             var js, fjs = d.getElementsByTagName(s)[0];
+                             if (d.getElementById(id)) return;
+                             js = d.createElement(s); js.id = id;
+                             js.src = "//connect.facebook.net/en_US/sdk.js";
+                             fjs.parentNode.insertBefore(js, fjs);
+                         }(document, 'script', 'facebook-jssdk'));
 
-                     // Here we run a very simple test of the Graph API after login is
-                     // successful.  See statusChangeCallback() for when this call is made.
-                     function testAPI() {
-                         console.log('Welcome!  Fetching your information.... ');
-                         FB.api('/me', function (response) {
-                             console.log('Successful login for: ' + response.name);
-                             //openFB.tokenStore = window.sessionStorage;
+                         // Here we run a very simple test of the Graph API after login is
+                         // successful.  See statusChangeCallback() for when this call is made.
+                         function testAPI() {
+                             console.log('Welcome!  Fetching your information.... ');
+                             FB.api('/me', function (response) {
+                                 console.log('Successful login for: ' + response.name);
+                                 //openFB.tokenStore = window.sessionStorage;
 
-                             document.getElementById('status').innerHTML =
-        'Thanks for logging in, ' + response.name + '!';
-                         });
-                     }
-
-
-                     //                    Collection of Post objects
-                     //                    https://developers.facebook.com/docs/graph-api/reference/v2.0/post
+                                 document.getElementById('status').innerHTML =
+            'Thanks for logging in, ' + response.name + '!';
+                             });
+                         }
 
 
-                     //                    id
-                     //                    story (* optional -- when someone else posted)
-                     //                    message (* optional -- when you post)
-                     //                    picture (thumbnail jpg to the photo)
-                     //                    link (* link to the photo page)
-                     //                    source (* A URL to any Flash movie or video file attached to the post.)
-                     //                    Name (* Name of the source?)
-                     //                    with_tags (list of people if u tagged it)
-                     //                    status_type (tagged_in_photo, mobile_status_update, shared_story, added_photos)
-                     //                    type (status, photo, 
-                     //                    description (info about the message/story)
-                     //                    application (* i.e. Windows Phone)
-                     //                    updated_time
-                     //                    created_date
+                         //                    Collection of Post objects
+                         //                    https://developers.facebook.com/docs/graph-api/reference/v2.0/post
+
+
+                         //                    id
+                         //                    story (* optional -- when someone else posted)
+                         //                    message (* optional -- when you post)
+                         //                    picture (thumbnail jpg to the photo)
+                         //                    link (* link to the photo page)
+                         //                    source (* A URL to any Flash movie or video file attached to the post.)
+                         //                    Name (* Name of the source?)
+                         //                    with_tags (list of people if u tagged it)
+                         //                    status_type (tagged_in_photo, mobile_status_update, shared_story, added_photos)
+                         //                    type (status, photo, 
+                         //                    description (info about the message/story)
+                         //                    application (* i.e. Windows Phone)
+                         //                    updated_time
+                         //                    created_date
 
 
 
@@ -269,10 +338,145 @@
 </div>
 
                  <div data-role="page" class="jqm-demos" data-quicklinks="true">
-                 <div data-role="header">
-		            <h1>StatusHistory</h1>
+                 <div id= "MyHeader" data-role="header" style="background-color: #38c;text-shadow:none;font-family:sans-serif;">
+                     <h1 style="color:white;">StatusHistory.com</h1>
+                     <div align="center"><fb:ad placementid="137162329692959_963758693699981" format="320x50" testmode="false"></fb:ad></div> 
 	            </div><!-- /header -->
-                  <div data-role="content">
+                 
+                 <div id="LoginBlock"> 
+                      
+		            <!-- Header -->
+			        <section id="header">
+				<div class="inner">
+					<span class="icon major fa-cloud"></span>
+                    <h2>Who is stalking you on Facebook?</h2>
+					<p><h3>StatusHistory.com is a utility that allows you to find out how friends interact with your Facebook page.</h3></p>
+
+                    
+                    
+                    <p>Find out your Facebook top commentors and top likers. <br />
+                        Determine your 'Ghost Friends' or friends who do not interact with your profile <br />
+                        Search/Scroll through your past Facebook statuses.</p> 
+                    <br />
+                    <p>
+                    <fb:login-button scope="user_posts,email" data-size="xlarge" onlogin="checkLoginState();">
+                  </fb:login-button>
+                    </p><br />
+                <h2>Log In to get started</h2>
+                    
+                It may take a few moments to retrieve your data<br />depending on how many statuses you have.
+				</div>
+			</section>
+                    <!-- Two -->
+                    <section id="Demo1" class="main style2">
+            <div class="container" align="center">
+                <h1>How it works</h1>
+                 <br /><br /><br /><br />
+                <div class="row 150%">
+                    
+                    <div class="6u 12u$(medium)">
+                        <header>
+                            <h2>Find out who commented on your statuses the most</h2>
+                        </header>
+                    </div>
+                    <div class="6u$ 12u$(medium) important(medium)">
+                        <span class="image"><img src="images/Demo1.PNG" alt="" /></span>
+                    </div>
+                </div>
+               <br /><br />
+                <div class="row 150%">
+                    <div class="6u 12u$(medium)">
+                        <header>
+                            <h2>Scroll through all of your past Facebook Statuses</h2>
+                        </header>
+                    </div>
+                    <div class="6u$ 12u$(medium) important(medium)">
+                        <span class="image"><img src="images/Demo2.PNG" alt="" /></span>
+                    </div>
+                </div>
+                <br /><br />
+                <div class="row 150%">
+                    <div class="6u 12u$(medium)">
+                        <header>
+                            <h2>Quickly search for keywords in your Facebook status history</h2>
+                        </header>
+                    </div>
+                    <div class="6u$ 12u$(medium) important(medium)">
+                        <span class="image"><img src="images/Demo3.PNG" alt="" /></span>
+                    </div>
+
+                 </div>
+                <br /><br />
+                <div class="row 150%">
+                    <div class="6u 12u$(medium)">
+                        <header>
+                            <h2>Perform all of the the same features for one of your Fan pages</h2>
+                        </header>
+                    </div>
+                    <div class="6u$ 12u$(medium) important(medium)">
+                        <span class="image"><img src="images/Demo4.PNG" alt="" /></span>
+                    </div>
+
+                </div>
+                
+                <br /><br />
+                <ul class="actions">
+                    <li><a href="#press" class="button scrolly">What they are saying</a></li>
+                </ul>
+            </div>
+        </section>
+		            <!-- One -->
+			        <section id="press" class="main style1">
+				<div class="container">
+					<div class="row 150%">
+						<div class="6u 12u$(medium)">
+							<header class="major">
+								<h2>"Find out your top 10 Facebook stalkers ... not only is this beneficial to the average Joe, but it can also be a big help with brands and companies"</h2>
+							</header>
+						</div>
+						<div class="6u$ 12u$(medium) important(medium)">
+                            <span class="image fit">
+                                <a target="_blank" href="http://www.adweek.com/socialtimes/status-history/437277?red=af"><img src="images/SocialTimes.PNG" alt="" /></a>
+                            </span>
+						</div>
+					</div>
+				</div>
+			</section>
+
+                    <section id="promo" class="main style1">
+            <div class="container">
+                <div class="row 150%">
+                    <div class="6u 12u$(medium)">
+                        <header class="major">
+                            <h2>"How to find an old Facebook Post.  'Liked' by over 3 million facebook users"</h2>
+                        </header>
+                    </div>
+                    <div class="6u$ 12u$(medium) important(medium)">
+                        <span class="image fit"><a target="_blank" href="http://www.tecmundo.com.br/tutorial/60973-facebook-fazer-encontrar-post-antigo-voce.htm"><img src="images/techmundo.jpg" alt="" /></a></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+		            <!-- Footer -->
+			        <section id="footer">
+				<ul class="icons">
+					<li><a href="https://www.twitter.com" class="icon alt fa-twitter"><span class="label">Twitter</span></a></li>
+					<li><a href="https://www.facebook.com/StatusHistory" class="icon alt fa-facebook"><span class="label">Facebook</span></a></li>
+					<!-- <li><a href="#" class="icon alt fa-instagram"><span class="label">Instagram</span></a></li>
+					<li><a href="#" class="icon alt fa-github"><span class="label">GitHub</span></a></li>
+					<li><a href="#" class="icon alt fa-envelope"><span class="label">Email</span></a></li>-->
+				</ul>
+				<ul class="copyright">
+					<li><a href="http://www.statushistory.com/privacy.html">Privacy</a></li><li><a href="http://www.statushistory.com/terms.html">Terms</a></li><li>&copy; StatusHistory.com</li><li>2015</li>
+				</ul>
+			</section>
+
+                </div>
+                     
+                     
+                     
+                 <div data-role="content">
                   
                   <span id="SearchStuff">
                         What do you want to search for?<span id="SearchBlock"><input type="search" name="search" id="search-basic" value="" /></span>
@@ -288,58 +492,18 @@
                  <div align="center" id="pageNavPosition"></div> 
                  <ul id="MyListView" data-role="listview" data-inset="true  class="ui-listview ui-listview-inset ui-corner-all ui-shadow">
                  </ul>
-                 <%--<div id="cmtLike" class="fb-like" data-href="http://www.facebook.com/pages/StatusHistorycom/226476307375941" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>--%>
-                 <div id="LoginBlock" align="center">
-                        <!--<h1>StatusHistory.com</h1>-->
-                        <img src="img/Mag173x173.png" /><br /><br />
-                        <b>Who are your Facebook friends that interact with your Facebook page the most?</b><br /><br />StatusHistory.com enables you to find out your Facebook top 10 commentors and top 10 likers.  You can also Scroll/Search through your past Facebook statuses.
-                        <br /> <br />
-                        <fb:login-button scope="user_posts,email" size="large" onlogin="checkLoginState();">
-                            Get Status History
-                        </fb:login-button>
-                        <br />
-                        <br />
-                        <br />
-                        <b>Find out your top 10s</b><br /><br />
-                        <img src="img/info.png" />
-                        <br />
-                        <br />
-                        <br />
-                        <b>Scroll through all of your past Posts</b><br /><br />
-                        <img src="img/Status.png" />
-                        <br />
-                        <br />
-                        <br />
-                        <b>Keyword search your Posts</b><br /><br />
-                        <img src="img/Search.png" />
-                        <br />
-                        <br />
-                        <br />
-                        <b>Do the same features as your Fan Page</b><br /><br />
-                        <img src="img/Settings.png" />
-
-                            
- <br /><br />
-	            <div align="center"><a href="http://www.statushistory.com/privacy.html" >[Privacy Policy]</a></div>
-
- <!--<p>Name: <span id="userName"></span></p>
-	           
-                            <button class="btn btn-block" onclick="getInfo()">Get My Info</button><br />
-                            <button class="btn btn-block" onclick="login()">Get My Status</button>-->
-                <br /><br />
-                                       
-                </div>
+                
                 <div id="SettingsDisplay">
                     Logged in as: <b><span id="userName"></span></b>
                     <br />
                     <div id="PagesLoginBlock" align="center">
-                    <br />
+                   <%-- <br />
                     Do you want to find out your Facebook top 10 commentors and top 10 likers of your <b>Facebook fan pages</b> you administer?<br /><br />
 
                     <fb:login-button scope="manage_pages" size="large" onlogin=" DisplayPages();">
                             Read Fan Pages
                         </fb:login-button>
-                        <br /><br />
+                        <br /><br />--%>
                     </div>
                     <div id="PagesBlock">
                      <div class="ui-field-contain">
@@ -360,11 +524,19 @@
                 </div>
 
                 <div id="info">
+                     <div align="center"><a href="#" onclick="FacebookPopup();"><img src="img/facebook.png" /></a> <a href="#" onclick="TwitterPopup();"><img src="img/Twitter.png" class="twitter-share-button" /></a></div>
+                    <br />
+                     <h3>Key Stats</h3>
+                    <ul id="MyStats" data-role="listview" data-inset="true">
+                    </ul>
                     <h3>Top 10 commentors</h3>
                     <ul id="TopCommentors" data-role="listview" data-inset="true">
                     </ul>
                     <h3>Top 10 Likers</h3>
                     <ul id="TopLikers" data-role="listview" data-inset="true">
+                    </ul>
+                     <h3>Ghost Friends</h3>
+                    <ul id="GhostFriends" data-role="listview" data-inset="true">
                     </ul>
                       <div align="center"><a href="#" onclick="FacebookPopup();"><img src="img/facebook.png" /></a> <a href="#" onclick="TwitterPopup();"><img src="img/Twitter.png" class="twitter-share-button" /></a></div>
                 </div>

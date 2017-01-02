@@ -1,4 +1,7 @@
-﻿var globalArray = [];
+﻿
+$('#MyHeader').hide();
+
+var globalArray = [];
 
 var CommentArray = new Array();
 var LikeArray = [];
@@ -12,7 +15,7 @@ var AlreadyPopulatedAccounts = '';
 var pager;
 var DoICancel;
 
-var FBWindow;fgh
+var FBWindow;
 
 
 document.addEventListener("backbutton", BackButtonPressed, false);
@@ -22,6 +25,8 @@ $('#info').hide();
 $('#SettingsDisplay').hide();
 $('#PagesBlock').hide();
 $('#cmtLike').hide();
+
+
 
 
 
@@ -188,6 +193,7 @@ function Pager(itemsPerPage, theArray) {
 }
 
 function DisplayLoader() {
+
     var $this = $(this),
         theme = $this.jqmData("theme") || $.mobile.loader.prototype.options.theme,
         msgText = $this.jqmData("msgtext") || $.mobile.loader.prototype.options.text,
@@ -199,7 +205,7 @@ function DisplayLoader() {
         textVisible: true,
         theme: 'b',
         textonly: textonly,
-        html: '<div align="center"><img src="http://www.statushistory.com/img/smallloader.gif"><br/><h1><span id="myCount">0</span> statuses retrieved</h1><br\><button class="btn btn-block" onclick="CancelMe();">Cancel</button></div>'
+        html: '<div align="center"><img src="http://www.statushistory.com/img/smallloader.gif"><br/><h1 style="text-shadow:none;color:white"><span id="myCount">0</span> statuses retrieved</h1><br\><button class="btn btn-block" onclick="CancelMe();"><span style="text-shadow:none;color:white">Cancel</span></button></div>'
     });
 }
 
@@ -212,6 +218,7 @@ function DisplayPages() {
     PopulateAccounts();
     $('#PagesLoginBlock').hide();
     $('#PagesBlock').show();
+    $('#MyHeader').show();
 
 
 }
@@ -490,6 +497,18 @@ function dynamicSort(property) {
     }
 }
 
+function dynamicSort2(property) {
+    var sortOrder = 1;
+    if (property[0] === "-") {
+        sortOrder = -1;
+        property = property.substr(1);
+    }
+    return function (a, b) {
+        var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+        return result * sortOrder;
+    }
+}
+
 
 
 function SortLikes() {
@@ -515,7 +534,11 @@ function SortLikes() {
     for (c = 0; c < sortedLikes.length; c++) {
 
         //console.log('loop: ' + i);
-        html += '<li><table><tr><td><img height="65" width="65" style="vertical-align:middle;" src="http://graph.facebook.com/' + sortedLikes[c].id + '/picture?type=normal" alt="France"></td><td>' + sortedLikes[c].name + ' liked <b>' + sortedLikes[c].count + '</b> times</td></tr></table></li>';
+        var myMessage = sortedLikes[c].name + ' overall liked my facebook status ' + sortedLikes[c].count + ' times. They rank #' + (c + 1) + ' out of my top 10';
+        //html += '<li><table><tr><td><img height="65" width="65" style="vertical-align:middle;" src="http://graph.facebook.com/' + sortedLikes[c].id + '/picture?type=normal" alt="France"></td><td>' + sortedLikes[c].name + ' liked <span style="font-weight: bold;">' + sortedLikes[c].count + '</span> times</td></tr></table></li>';
+        html += '<li><table><tr><td style="width:90px"><img height="65" width="65" style="vertical-align:middle;" src="http://graph.facebook.com/' + sortedLikes[c].id + '/picture?type=normal" alt="France"></td><td>' + sortedLikes[c].name + ' liked <span style="font-weight: bold;">' + sortedLikes[c].count + '</span> times <a href="#" onclick="FacebookShare(\'' + myMessage + '\')">[Share]</a></td></tr></table></li>';
+
+
         if (c > 10) {
             break;  //bail after 10
         }
@@ -551,11 +574,63 @@ function SortComments() {
     for (c = 0; c < sortedComments.length; c++) {
 
         //console.log('loop: ' + i);
-        html += '<li><table><tr><td><img height="65" width="65" style="vertical-align:middle;" src="http://graph.facebook.com/' + sortedComments[c].id + '/picture?type=normal" alt="France"></td><td>' + sortedComments[c].name + ' commented <b>' + sortedComments[c].count + '</b> times</td></tr></table></li>';
+        var myMessage = sortedComments[c].name + ' overall commented ' + sortedComments[c].count + ' times on my Facebook statuses.  They rank #' + (c + 1) + ' out of my top 10';
+        html += '<li><table><tr><td style="width:90px"><img height="65" width="65" style="vertical-align:middle;" src="http://graph.facebook.com/' + sortedComments[c].id + '/picture?type=normal" alt="France"></td><td>' + sortedComments[c].name + ' commented <span style="font-weight: bold;">' + sortedComments[c].count + '</span> times <a href="#" onclick="FacebookShare(\'' + myMessage + '\')">[Share]</a></td></tr></table></li>';
         if (c > 10) {
             break;  //bail after 10
         }
-        //console.log('name: ' + sortedComments[c].name + ' count: ' + sortedComments[c].count);
+        console.log('name: ' + sortedComments[c].name + ' count: ' + sortedComments[c].count);
+    }
+
+    list.innerHTML = html;
+
+}
+
+function ReportStats(TotalComments, TotalLikes, TotalPosts, TheUser) {
+    var list = document.getElementById('MyStats');
+    var html = '';
+
+    var myMessage = 'I overall posted ' + TotalPosts + ' times, had ' + TotalComments + ' comments and ' + TotalLikes + ' likes.';
+    html = '<li><table><tr><td style="width:90px"><img height="65" width="65" style="vertical-align:middle;" src="http://graph.facebook.com/' + TheUser + '/picture?type=normal" alt="France"></td><td>I overall posted <span style="font-weight: bold;">' + TotalPosts + '</span> times, had <span style="font-weight: bold;">' + TotalComments + '</span> comments and <span style="font-weight: bold;">' + TotalLikes + '</span> likes  <a href="#" onclick="FacebookShare(\'' + myMessage + '\')">[Share]</a></td></tr></table></li>';
+
+    list.innerHTML = html;
+
+    console.log('Made it into ReportStats');
+
+}
+
+
+function SortGhosts(friends) {
+
+    //Sort Comments
+    var sortedGhosts = [];
+
+    TotalComments = 0;
+
+    for (var key in CommentArray) {
+        var MyComment = CommentArray[key];
+
+        TotalComments = TotalComments + MyComment.count;
+        sortedGhosts.push(MyComment);
+    }
+
+    sortedGhosts.sort(dynamicSort2("count"));
+    //We are done at this point
+
+    //This just prints them out
+    var list = document.getElementById('GhostFriends');
+    var html = '';
+
+    for (c = 0; c < sortedGhosts.length; c++) {
+
+        //console.log('loop: ' + i);
+        var myMessage = sortedGhosts[c].name + ' is a Facebook *Ghost* friend.  They have only ever commented ONCE on my Facebook status';
+        //html += '<li><table><tr><td><img height="65" width="65" style="vertical-align:middle;" src="http://graph.facebook.com/' + sortedGhosts[c].id + '/picture?type=normal" alt="France"></td><td>' + sortedGhosts[c].name + ' commented <span style="font-weight: bold;">' + sortedGhosts[c].count + '</span> times</td></tr></table></li>';
+        html += '<li><table><tr><td style="width:90px"><img height="65" width="65" style="vertical-align:middle;" src="http://graph.facebook.com/' + sortedGhosts[c].id + '/picture?type=normal" alt="France"></td><td>' + sortedGhosts[c].name + ' commented ONLY <span style="font-weight: bold;">' + sortedGhosts[c].count + '</span> time. <a href="#" onclick="FacebookShare(\'' + myMessage + '\')">[Share]</a></td></tr></table></li>';
+        if (c > 30) {
+            break;  //bail after 10
+        }
+        console.log('Ghost name: ' + sortedGhosts[c].name + ' Ghost count: ' + sortedGhosts[c].count);
     }
 
     list.innerHTML = html;
@@ -567,6 +642,7 @@ function DoneWithLoading() {
     //Hide
     HideLoader();
     document.getElementById("LoginBlock").style.display = 'none';
+
     $("#SearchStuff").hide();
 
     //Show Menu
@@ -856,8 +932,10 @@ function TryInner(url) {
                         console.log('Friend Count: ' + data.data.length);
 
                         FriendsCount = data.data.length;
+
                         SortComments();
                         SortLikes();
+                        SortGhosts(data.data);
 
                         console.log(Object.keys(CommentArray).length + ' out of ' + FriendsCount + ' friends commented on one of your status updates');
                         console.log(Object.keys(LikeArray).length + ' out of ' + FriendsCount + ' friends liked on one of your status updates');
@@ -870,15 +948,18 @@ function TryInner(url) {
                             success: function (data) {
                                 TheUser = data.name;
                                 TheUserID = data.id;
+
+                                ReportStats(TotalComments, TotalLikes, globalArray.length, TheUserID);
+
                                 //Lets logs
                                 $.get("mystats.aspx?id=" + TheUserID + "&c=" + TotalComments + "&l=" + TotalLikes + "&p=" + globalArray.length + "&g=good");
 
                             },
-                            error: function (ErrorResponse) { console.log('error2: ' + JSON.stringify(ErrorResponse)); DoneWithLoading(); }
+                            error: function (ErrorResponse) { console.log('error2: ' + JSON.stringify(ErrorResponse)); DoICancel = true; TryInner(url.split('&until')[0]); }
                         });
 
                     },
-                    error: function (ErrorResponse) { console.log('error3: ' + JSON.stringify(ErrorResponse)); DoneWithLoading(); }
+                    error: function (ErrorResponse) { console.log('error3: ' + JSON.stringify(ErrorResponse)); DoICancel = true; TryInner(url.split('&until')[0]); }
                 });
 
 
@@ -890,7 +971,7 @@ function TryInner(url) {
             }
 
         },
-        error: function (ErrorResponse) { console.log('error1: ' + JSON.stringify(ErrorResponse)); DoneWithLoading(); }
+        error: function (ErrorResponse) { console.log('error1: ' + JSON.stringify(ErrorResponse)); DoICancel = true; TryInner(url.split('&until')[0]); }
     });
 
 }
@@ -898,7 +979,9 @@ function TryInner(url) {
 
 function TryThis() {
 
+
     $('#LoginBlock').hide();
+    $('#MyHeader').hide();
     DisplayLoader();
 
     DoICancel = false;
@@ -906,14 +989,14 @@ function TryThis() {
     openFB.api({
         path: '/' + SelectedUser + '/posts',
         params: {
-            limit: '25'
+            limit: '50'
         },
         success: function (data) {
             //console.log(JSON.stringify(data));
 
             //console.log('Before parse');
             //console.log('The length is: ' + data.data.length);
-
+            $('#MyHeader').show();
 
             var StatusArray = CreateStatusArray(data);
             globalArray = globalArray.concat(StatusArray);
