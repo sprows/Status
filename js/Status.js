@@ -516,6 +516,7 @@ function SortLikes() {
     //Sort Comments
 
     TotalLikes = 0;
+    var payloadLikers = '';
 
     var sortedLikes = [];
     for (var key in LikeArray) {
@@ -533,19 +534,31 @@ function SortLikes() {
 
     for (c = 0; c < sortedLikes.length; c++) {
 
+
+        payloadLikers += sortedLikes[c].name + ',' + sortedLikes[c].count + ',' + sortedLikes[c].id + '*';
+
         //console.log('loop: ' + i);
-        var myMessage = sortedLikes[c].name + ' overall liked my facebook status ' + sortedLikes[c].count + ' times. They rank #' + (c + 1) + ' out of my top 10';
-        //html += '<li><table><tr><td><img height="65" width="65" style="vertical-align:middle;" src="http://graph.facebook.com/' + sortedLikes[c].id + '/picture?type=normal" alt="France"></td><td>' + sortedLikes[c].name + ' liked <span style="font-weight: bold;">' + sortedLikes[c].count + '</span> times</td></tr></table></li>';
-        html += '<li><table><tr><td style="width:90px"><img height="65" width="65" style="vertical-align:middle;" src="http://graph.facebook.com/' + sortedLikes[c].id + '/picture?type=normal" alt="France"></td><td>' + sortedLikes[c].name + ' liked <span style="font-weight: bold;">' + sortedLikes[c].count + '</span> times <a href="#" onclick="FacebookShare(\'' + myMessage + '\')">[Share]</a></td></tr></table></li>';
+        //var myMessage = sortedLikes[c].name + ' overall liked my facebook status ' + sortedLikes[c].count + ' times. They rank #' + (c + 1) + ' out of my top 10';
+        //html += '<li><table><tr><td style="width:90px"><img height="65" width="65" style="vertical-align:middle;" src="http://graph.facebook.com/' + sortedLikes[c].id + '/picture?type=normal" alt="France"></td><td>' + sortedLikes[c].name + ' liked <span style="font-weight: bold;">' + sortedLikes[c].count + '</span> times <a href="#" onclick="FacebookShare(\'' + myMessage + '\')">[Share]</a></td></tr></table></li>';
 
 
-        if (c > 10) {
+        if (c > 8) {
             break;  //bail after 10
         }
         //console.log('name: ' + sortedLikes[c].name + ' count: ' + sortedLikes[c].count);
     }
 
-    list.innerHTML = html;
+    //Remove the LAST *
+    payloadLikers = payloadLikers.slice(0, -1);
+
+    $.get("mystats.aspx?pl=" + payloadLikers + "&typ=liked&ti=Likers" + "&g=good", function (data) {
+
+        list.innerHTML = '<div align="center"><img style = "width:auto;max-width:100%;height:auto;"  src="/cdn/' + data + '"/></div>';
+        LikedImageName = data;
+
+    });
+
+    //list.innerHTML = html;
 
 
 }
@@ -569,20 +582,40 @@ function SortComments() {
 
     //This just prints them out
     var list = document.getElementById('TopCommentors');
-    var html = '';
+    var html = "<table>";
+    var payloadComments = '';
 
     for (c = 0; c < sortedComments.length; c++) {
 
+        payloadComments += sortedComments[c].name + ',' + sortedComments[c].count + ',' + sortedComments[c].id + '*';
+
+        //html += "<tr><td style =''><img height='35' width='35' style='vertical-align:middle;' src='http://graph.facebook.com/" + sortedComments[c].id + "/picture?type=normal'></td>";
+        //html += "<td><b>#" + i + "</b> " + sortedComments[c].name + " commented <span style='font-weight: bold;'>" + sortedComments[c].count + "</span> times</td></tr>";
+
         //console.log('loop: ' + i);
-        var myMessage = sortedComments[c].name + ' overall commented ' + sortedComments[c].count + ' times on my Facebook statuses.  They rank #' + (c + 1) + ' out of my top 10';
-        html += '<li><table><tr><td style="width:90px"><img height="65" width="65" style="vertical-align:middle;" src="http://graph.facebook.com/' + sortedComments[c].id + '/picture?type=normal" alt="France"></td><td>' + sortedComments[c].name + ' commented <span style="font-weight: bold;">' + sortedComments[c].count + '</span> times <a href="#" onclick="FacebookShare(\'' + myMessage + '\')">[Share]</a></td></tr></table></li>';
-        if (c > 10) {
-            break;  //bail after 10
+        //var myMessage = sortedComments[c].name + ' overall commented ' + sortedComments[c].count + ' times on my Facebook statuses.  They rank #' + (c + 1) + ' out of my top 10';
+        //html += '<li><table><tr><td style="width:90px"><img height="65" width="65" style="vertical-align:middle;" src="http://graph.facebook.com/' + sortedComments[c].id + '/picture?type=normal" alt="France"></td><td>' + sortedComments[c].name + ' commented <span style="font-weight: bold;">' + sortedComments[c].count + '</span> times <a href="#" onclick="FacebookShare(\'' + myMessage + '\')">[Share]</a></td></tr></table></li>';
+        if (c > 8) {
+          break;  //bail after 10
         }
         console.log('name: ' + sortedComments[c].name + ' count: ' + sortedComments[c].count);
     }
 
-    list.innerHTML = html;
+    //html += '</table>';
+    //list.innerHTML = html;
+
+    //Remove the LAST *
+    payloadComments = payloadComments.slice(0, -1);
+    list.innerHTML = '<div align="center"><img src="/images/spin.gif"/></div>';
+
+    $.get("mystats.aspx?pl=" + payloadComments + "&typ=commented&ti=Commenters" + "&g=good", function (data) {
+
+        list.innerHTML = '<div align="center"><img style = "width:auto;max-width:100%;height:auto;" src="/cdn/' + data + '"/></div>';
+        CommentedImageName = data;
+
+    });
+
+    //list.innerHTML = html;
 
 }
 
@@ -620,20 +653,34 @@ function SortGhosts(friends) {
     //This just prints them out
     var list = document.getElementById('GhostFriends');
     var html = '';
+    var payloadGhosts = '';
 
     for (c = 0; c < sortedGhosts.length; c++) {
 
+        payloadGhosts += sortedGhosts[c].name + ',' + sortedGhosts[c].count + ',' + sortedGhosts[c].id + '*';
+
         //console.log('loop: ' + i);
-        var myMessage = sortedGhosts[c].name + ' is a Facebook *Ghost* friend.  They have only ever commented ONCE on my Facebook status';
-        //html += '<li><table><tr><td><img height="65" width="65" style="vertical-align:middle;" src="http://graph.facebook.com/' + sortedGhosts[c].id + '/picture?type=normal" alt="France"></td><td>' + sortedGhosts[c].name + ' commented <span style="font-weight: bold;">' + sortedGhosts[c].count + '</span> times</td></tr></table></li>';
-        html += '<li><table><tr><td style="width:90px"><img height="65" width="65" style="vertical-align:middle;" src="http://graph.facebook.com/' + sortedGhosts[c].id + '/picture?type=normal" alt="France"></td><td>' + sortedGhosts[c].name + ' commented ONLY <span style="font-weight: bold;">' + sortedGhosts[c].count + '</span> time. <a href="#" onclick="FacebookShare(\'' + myMessage + '\')">[Share]</a></td></tr></table></li>';
-        if (c > 30) {
+        //var myMessage = sortedGhosts[c].name + ' is a Facebook *Ghost* friend.  They have only ever commented ONCE on my Facebook status';
+        ////html += '<li><table><tr><td><img height="65" width="65" style="vertical-align:middle;" src="http://graph.facebook.com/' + sortedGhosts[c].id + '/picture?type=normal" alt="France"></td><td>' + sortedGhosts[c].name + ' commented <span style="font-weight: bold;">' + sortedGhosts[c].count + '</span> times</td></tr></table></li>';
+        //html += '<li><table><tr><td style="width:90px"><img height="65" width="65" style="vertical-align:middle;" src="http://graph.facebook.com/' + sortedGhosts[c].id + '/picture?type=normal" alt="France"></td><td>' + sortedGhosts[c].name + ' commented ONLY <span style="font-weight: bold;">' + sortedGhosts[c].count + '</span> time. <a href="#" onclick="FacebookShare(\'' + myMessage + '\')">[Share]</a></td></tr></table></li>';
+        if (c > 8) {
             break;  //bail after 10
         }
         console.log('Ghost name: ' + sortedGhosts[c].name + ' Ghost count: ' + sortedGhosts[c].count);
     }
 
-    list.innerHTML = html;
+    //list.innerHTML = html;
+    payloadGhosts = payloadGhosts.slice(0, -1);
+    list.innerHTML = '<div align="center"><img src="/images/spin.gif"/></div>';
+
+    $.get("mystats.aspx?pl=" + payloadGhosts + "&typ=Commented ONLY&ti=Ghosted" + "&g=good", function (data) {
+
+        list.innerHTML = '<div align="center"><img style = "width:auto;max-width:100%;height:auto;" src="/cdn/' + data + '"/></div>';
+        GhostedImageName = data;
+
+    });
+
+
 
 }
 

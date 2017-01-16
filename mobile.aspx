@@ -7,17 +7,17 @@
     <meta charset="utf-8" />
         <meta name="format-detection" content="telephone=no" />
         <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-        <meta property="og:title" content="StatusHistory.com"/>
+        <meta property="og:title" content="My biggest stalkers on Facebook!"/>
         <meta property="og:type" content="website"/>
-        <meta property="og:url" content="http://www.StatusHistory.com/"/>
-        <meta property="og:image" content="http://www.statushistory.com/cloud.png"/>
+        <meta property="fb:app_id" content="137162329692959"/>
+        <meta property="og:url" content=<%=FBPageName%>/>
+        <meta property="og:image" content=<%=FBImageName%>/>
         <meta property="og:site_name" content="StatusHistory.com"/>
-        <meta property="fb:admins" content="767233921"/>
-        <meta property="fb:app_id" content="767233921" />
+        <meta property="og:image:width" content="601"/>
+        <meta property="og:image:height" content="672"/>  
         <meta property="og:description"
           content="Who is stalking you on Facebook? StatusHistory.com enables you to find out your Facebook top 10 commentors and top 10 likers.  You can also Scroll/Search through your past Facebook statuses"/>
-         
+        <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0"/>
        
 
         <link rel="stylesheet" href="css/skel.css" />
@@ -52,10 +52,16 @@
         ul.someText li {
             font-size:30px;
         }
+
+
         
       
     </style>
     <script type="text/javascript">
+
+        var CommentedImageName = '';
+        var LikedImageName = '';
+        var GhostedImageName = '';
 
         var _gaq = _gaq || [];
         _gaq.push(['_setAccount', 'UA-2623536-3']);
@@ -84,12 +90,18 @@
             return false;
         }
 
-        function FacebookPopup() {
+        
+
+        function FacebookPush(ImageName) {
 
             FB.ui({
-                method: 'share',
-                href: 'http://www.statushistory.com',
+                method: 'feed',
+                link: 'http://www.statushistory.com',
+                picture: ImageName,
+                caption: 'Who is stalking you on Facebook?',
+                description: 'StatusHistory.com enables you to find out your Facebook top 10 commentors and top 10 likers.  You can also Scroll/Search through your past Facebook statuses',
             }, function (response) { });
+
         }
 
         function FacebookShare(desc) {
@@ -107,6 +119,14 @@
 
 </script>
         <script type="text/javascript">
+
+            function FacebookPopup(ImageName) {
+
+                FB.ui({
+                    method: 'share',
+                    href: 'http://www.statushistory.com/mobile.aspx?i=' + ImageName,
+                }, function (response) { });
+            }
 
             $("#LoginBlock").hide();
 
@@ -524,21 +544,32 @@
                 </div>
 
                 <div id="info">
-                     <div align="center"><a href="#" onclick="FacebookPopup();"><img src="img/facebook.png" /></a> <a href="#" onclick="TwitterPopup();"><img src="img/Twitter.png" class="twitter-share-button" /></a></div>
                     <br />
                      <h3>Key Stats</h3>
                     <ul id="MyStats" data-role="listview" data-inset="true">
                     </ul>
-                    <h3>Top 10 commentors</h3>
-                    <ul id="TopCommentors" data-role="listview" data-inset="true">
-                    </ul>
-                    <h3>Top 10 Likers</h3>
-                    <ul id="TopLikers" data-role="listview" data-inset="true">
-                    </ul>
-                     <h3>Ghost Friends</h3>
-                    <ul id="GhostFriends" data-role="listview" data-inset="true">
-                    </ul>
-                      <div align="center"><a href="#" onclick="FacebookPopup();"><img src="img/facebook.png" /></a> <a href="#" onclick="TwitterPopup();"><img src="img/Twitter.png" class="twitter-share-button" /></a></div>
+                    
+                    <h4><div align="center">These are your top 10 friends who <b>Commented</b> on your statuses the most in Facebook.  Share this right now with your friends and let them know who are your stalkers!</div></h4>
+                    
+
+                    <div align="center"><a href="#" onclick="FacebookPopup(CommentedImageName);"><img src="img/facebook.png" /></a></div>
+                    <div id="TopCommentors"></div>
+                    <div align="center"><a href="#" onclick="FacebookPopup(CommentedImageName);"><img src="img/facebook.png" /></a></div>
+                    
+                    <br /><br /><br />
+
+                    <h4><div align="center">These are your top 10 friends who <b>Liked</b> your statuses the most in Facebook.  Share this right now with your friends and let them know who are your stalkers!</div></h4>
+                    <div align="center"><a href="#" onclick="FacebookPopup(LikedImageName);"><img src="img/facebook.png" /></a></div>
+                    <div id="TopLikers"></div>
+                    <div align="center"><a href="#" onclick="FacebookPopup(LikedImageName);"><img src="img/facebook.png" /></a></div>
+                    
+                    <br /><br /><br />
+
+                    <h4><div align="center">These are your "Ghost" friends who only commented 1 time on your Facebook.  Share this right now with your friends and let them know who are your "Ghost Friends"!</div></h4>
+                    <div align="center"><a href="#" onclick="FacebookPopup(GhostedImageName);"><img src="img/facebook.png" /></a></div>
+                    <div id="GhostFriends"></div>
+                    <div align="center"><a href="#" onclick="FacebookPopup(GhostedImageName);"><img src="img/facebook.png" /></a></div>
+                 
                 </div>
                 
                 </div>
@@ -582,6 +613,67 @@
                 text-decoration: underline;
                 cursor: pointer;
             }
+
+            @media only screen 
+            and (min-device-width : 320px) 
+            and (max-device-width : 480px) {
+            /* Styles */
+            }
+
+            /* Smartphones (landscape) ----------- */
+            @media only screen 
+            and (min-width : 321px) {
+            /* Styles */
+            }
+
+            /* Smartphones (portrait) ----------- */
+            @media only screen 
+            and (max-width : 320px) {
+            /* Styles */
+            }
+
+            /* iPads (portrait and landscape) ----------- */
+            @media only screen 
+            and (min-device-width : 768px) 
+            and (max-device-width : 1024px) {
+            /* Styles */
+            }
+
+            /* iPads (landscape) ----------- */
+            @media only screen 
+            and (min-device-width : 768px) 
+            and (max-device-width : 1024px) 
+            and (orientation : landscape) {
+            /* Styles */
+            }
+
+            /* iPads (portrait) ----------- */
+            @media only screen 
+            and (min-device-width : 768px) 
+            and (max-device-width : 1024px) 
+            and (orientation : portrait) {
+            /* Styles */
+            }
+
+            /* Desktops and laptops ----------- */
+            @media only screen 
+            and (min-width : 1224px) {
+            /* Styles */
+            }
+
+            /* Large screens ----------- */
+            @media only screen 
+            and (min-width : 1824px) {
+            /* Styles */
+            }
+
+            /* iPhone 4 ----------- */
+            @media
+            only screen and (-webkit-min-device-pixel-ratio : 1.5),
+            only screen and (min-device-pixel-ratio : 1.5) {
+            /* Styles */
+
+
         </style>
 </body>
 
