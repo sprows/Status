@@ -301,9 +301,12 @@ function CreateStatusArray(status) {
             StatusOBJ.source = status.data[i].source;
         }
 
-        if (status.data[i].from.name != undefined) {
-            StatusOBJ.name = status.data[i].from.name;
+        if (status.data[i].from != undefined) {
+            if (status.data[i].from.name != undefined) {
+                StatusOBJ.name = status.data[i].from.name;
+            }
         }
+       
 
         if (status.data[i].with_tags != undefined) {
             StatusOBJ.with_tags = status.data[i].with_tags;
@@ -454,9 +457,18 @@ function OpenFBWindow(url) {
 
 function shorten(text, maxLength) {
     var ret = text;
-    if (ret.length > maxLength) {
-        ret = ret.substr(0, maxLength - 3) + " ...";
+    if (ret != undefined)
+    {
+        if (ret.length > maxLength) {
+            ret = ret.substr(0, maxLength - 3) + " ...";
+        }
+
     }
+    else
+    {
+        ret = '';
+    }
+    
     return ret;
 }
 
@@ -982,10 +994,10 @@ function TryInner(url) {
 
                         SortComments();
                         SortLikes();
-                        SortGhosts(data.data);
+                        //SortGhosts(data.data);
 
-                        console.log(Object.keys(CommentArray).length + ' out of ' + FriendsCount + ' friends commented on one of your status updates');
-                        console.log(Object.keys(LikeArray).length + ' out of ' + FriendsCount + ' friends liked on one of your status updates');
+                        //console.log(Object.keys(CommentArray).length + ' out of ' + FriendsCount + ' friends commented on one of your status updates');
+                        //console.log(Object.keys(LikeArray).length + ' out of ' + FriendsCount + ' friends liked on one of your status updates');
 
                         console.log('Friends have Commented on your statuses ' + TotalComments + ' times.');
                         console.log('Friends have Liked on your statuses ' + TotalLikes + ' times.');
@@ -1036,10 +1048,11 @@ function TryThis() {
     openFB.api({
         path: '/' + SelectedUser + '/posts',
         params: {
-            limit: '50'
+            limit: '50',
+            fields: 'comments,story,picture,name,with_tags,status_type,description,likes,id,updated_time,link,message'
         },
         success: function (data) {
-            //console.log(JSON.stringify(data));
+            //console.log(JSON.stringify(data));name
 
             //console.log('Before parse');
             //console.log('The length is: ' + data.data.length);
@@ -1047,10 +1060,10 @@ function TryThis() {
 
             var StatusArray = CreateStatusArray(data);
             globalArray = globalArray.concat(StatusArray);
-            console.log('tom: ' + JSON.stringify(data));
+            //console.log('tom: ' + JSON.stringify(data) + ' :ss');
             var theredirect = data.paging.next;
             theredirect = theredirect.replace('https://graph.facebook.com', '');
-            theredirect = theredirect.replace('v1.0', 'v2.3');
+            //theredirect = theredirect.replace('v2.3', 'v2.8');
 
             TryInner(theredirect);
 

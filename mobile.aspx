@@ -104,7 +104,17 @@
 
         }
 
+        function ShareStuff(ImageName) {
+
+            //var TheImage = ImageName;
+            var TheImage = 'http%3A%2F%2Fwww.statushistory.com%2Fcdn%2F66771c16-700e-4782-8964-b8d5dc3d2a67.png';
+            var theURL = 'https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.statushistory.com&picture=' + TheImage + '&title=My+biggest+stalkers+on+Facebook%21&caption=StatusHistory.com&quote=&description=Who+is+stalking+you+on+Facebook%3F+StatusHistory.com+enables+you+to+find+out+your+Facebook+top+10+commentors+and+top+10+likers.++You+can+also+Scroll%2FSearch+through+your+past+Facebook+statuses';
+            window.open(theURL);
+        }
+
         function FacebookShare(desc) {
+
+           
 
             FB.ui({
                 method: 'feed',
@@ -117,6 +127,8 @@
         }
         ;
 
+      
+
 </script>
         <script type="text/javascript">
 
@@ -126,6 +138,13 @@
                     method: 'share',
                     href: 'http://www.statushistory.com/mobile.aspx?i=' + ImageName,
                 }, function (response) { });
+
+
+                ////var TheImage = ImageName;
+                //var TheImage = 'http://www.statushistory.com/test.png';
+                //var theURL = 'https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.statushistory.com&picture=http%3A%2F%2Fwww.statushistory.com/cdn/' + ImageName + '&title=My+biggest+stalkers+on+Facebook%21&caption=StatusHistory.com&quote=&description=Who+is+stalking+you+on+Facebook%3F+StatusHistory.com+enables+you+to+find+out+your+Facebook+top+10+commentors+and+top+10+likers.++You+can+also+Scroll%2FSearch+through+your+past+Facebook+statuses';
+                //window.open(theURL);
+
             }
 
             $("#LoginBlock").hide();
@@ -360,7 +379,7 @@
                  <div data-role="page" class="jqm-demos" data-quicklinks="true">
                  <div id= "MyHeader" data-role="header" style="background-color: #38c;text-shadow:none;font-family:sans-serif;">
                      <h1 style="color:white;">StatusHistory.com</h1>
-                     <div align="center"><fb:ad placementid="137162329692959_963758693699981" format="320x50" testmode="false"></fb:ad></div> 
+                     <%--<div align="center"><fb:ad placementid="137162329692959_963758693699981" format="320x50" testmode="false"></fb:ad></div> --%>
 	            </div><!-- /header -->
                  
                  <div id="LoginBlock"> 
@@ -549,26 +568,26 @@
                     <ul id="MyStats" data-role="listview" data-inset="true">
                     </ul>
                     
-                    <h4><div align="center">These are your top 10 friends who <b>Commented</b> on your statuses the most in Facebook.  Share this right now with your friends and let them know who are your stalkers!</div></h4>
+                    <%--<h4><div align="center">These are your top 10 friends who <b>Commented</b> on your statuses the most in Facebook.  Share this right now with your friends and let them know who are your stalkers!</div></h4>--%>
                     
 
-                    <div align="center"><a href="#" onclick="FacebookPopup(CommentedImageName);"><img src="img/facebook.png" /></a></div>
+                   <%-- <div align="center"><a href="#" onclick="FacebookPopup(CommentedImageName);"><img src="img/facebook.png" /></a></div>--%>
                     <div id="TopCommentors"></div>
                     <div align="center"><a href="#" onclick="FacebookPopup(CommentedImageName);"><img src="img/facebook.png" /></a></div>
                     
-                    <br /><br /><br />
+                    <br />
 
-                    <h4><div align="center">These are your top 10 friends who <b>Liked</b> your statuses the most in Facebook.  Share this right now with your friends and let them know who are your stalkers!</div></h4>
-                    <div align="center"><a href="#" onclick="FacebookPopup(LikedImageName);"><img src="img/facebook.png" /></a></div>
+                   <%-- <h4><div align="center">These are your top 10 friends who <b>Liked</b> your statuses the most in Facebook.  Share this right now with your friends and let them know who are your stalkers!</div></h4>--%>
+                    <%--<div align="center"><a href="#" onclick="FacebookPopup(LikedImageName);"><img src="img/facebook.png" /></a></div>--%>
                     <div id="TopLikers"></div>
                     <div align="center"><a href="#" onclick="FacebookPopup(LikedImageName);"><img src="img/facebook.png" /></a></div>
                     
                     <br /><br /><br />
 
-                    <h4><div align="center">These are your "Ghost" friends who only commented 1 time on your Facebook.  Share this right now with your friends and let them know who are your "Ghost Friends"!</div></h4>
+                   <%-- <h4><div align="center">These are your "Ghost" friends who only commented 1 time on your Facebook.  Share this right now with your friends and let them know who are your "Ghost Friends"!</div></h4>
                     <div align="center"><a href="#" onclick="FacebookPopup(GhostedImageName);"><img src="img/facebook.png" /></a></div>
                     <div id="GhostFriends"></div>
-                    <div align="center"><a href="#" onclick="FacebookPopup(GhostedImageName);"><img src="img/facebook.png" /></a></div>
+                    <div align="center"><a href="#" onclick="FacebookPopup(GhostedImageName);"><img src="img/facebook.png" /></a></div>--%>
                  
                 </div>
                 

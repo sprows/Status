@@ -195,9 +195,9 @@
 
         params['access_token'] = tokenStore['fbtoken'];
 
-        url = 'https://graph.facebook.com/v2.3' + obj.path + '?' + toQueryString(params);
+        url = 'https://graph.facebook.com/v2.8' + obj.path + '?' + toQueryString(params);
 
-        console.log('tom url: ' + url);
+        //console.log('tom url: ' + url);
 
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {

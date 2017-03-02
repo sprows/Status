@@ -89,22 +89,39 @@ namespace SC
 
             int i = 1;
             Guid imageName = Guid.NewGuid();
-            string html = "<table width ='605'>";
+            string html = "<table width ='605'><tr><td colspan='2'><div align='center'><h2>My top 10 most " + action + " statuses</h2></div></td></tr>";
+            string table1 = "";
+            string table2 = "";
 
             string[] Names = payload.Split('*');
             foreach (var c in Names)
             {
-
+                
                 string[] NameBundle = c.Split(',');
-                html += "<tr><td align='right'><img height='65' width='65' src='http://graph.facebook.com/" + NameBundle[2] + "/picture?type=normal'></td>";
-                html += "<td><b>#" + i + "</b> " + NameBundle[0] + " " + action + " <span style='font-weight: bold;'>" + NameBundle[1] + "</span> times</td></tr>";
+
+                if (i< 6)
+                {
+                    table1 += "<tr><td align='right'><img height='45' width='45' src='http://graph.facebook.com/" + NameBundle[2] + "/picture?type=normal'></td>";
+                    table1 += "<td><b>#" + i + "</b> " + NameBundle[0] + " <span style='font-weight: bold;'>" + NameBundle[1] + "</span> times</td></tr>";
+                   
+                }
+                else
+                {
+                    table2 += "<tr><td align='right'><img height='45' width='45' src='http://graph.facebook.com/" + NameBundle[2] + "/picture?type=normal'></td>";
+                    table2 += "<td><b>#" + i + "</b> " + NameBundle[0] + " <span style='font-weight: bold;'>" + NameBundle[1] + "</span> times</td></tr>";
+
+                }
+
                 i += 1;
             }
 
-            html += "</table>";
+            table1 = "<table>" + table1 + "</table>";
+            table2 = "<table>" + table2 + "</table>";
+
+            html += "<tr><td>" + table1 + "</td><td>" + table2 + "</td></tr></table>";
 
             lock (obj) { 
-                using (System.Drawing.Image image = TheArtOfDev.HtmlRenderer.WinForms.HtmlRender.RenderToImageGdiPlus(html,601))
+                using (System.Drawing.Image image = TheArtOfDev.HtmlRenderer.WinForms.HtmlRender.RenderToImageGdiPlus(html))
                 {
                     string path = HttpContext.Current.Server.MapPath("~/cdn/" + imageName + ".png");
                     image.Save(path, ImageFormat.Png);
