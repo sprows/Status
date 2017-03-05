@@ -89,7 +89,7 @@ namespace SC
 
             int i = 1;
             Guid imageName = Guid.NewGuid();
-            string html = "<table width ='605'><tr><td colspan='2'><div align='center'><h2>My top 10 most " + action + " statuses</h2></div></td></tr>";
+            string html = "<table width ='605'><tr><td colspan='2' style='padding-bottom: 20px;'><div align='center' style='font-size:20pt;'><b>My top 10 most " + action + " statuses</b></div></br></br></td></tr>";
             string table1 = "";
             string table2 = "";
 
@@ -118,7 +118,7 @@ namespace SC
             table1 = "<table>" + table1 + "</table>";
             table2 = "<table>" + table2 + "</table>";
 
-            html += "<tr><td>" + table1 + "</td><td>" + table2 + "</td></tr></table>";
+            html += "<tr><td>" + table1 + "</td><td>" + table2 + "</td></tr></table><p></p>";
 
             lock (obj) { 
                 using (System.Drawing.Image image = TheArtOfDev.HtmlRenderer.WinForms.HtmlRender.RenderToImageGdiPlus(html))

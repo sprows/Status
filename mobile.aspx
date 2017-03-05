@@ -573,13 +573,15 @@
 
                    <%-- <div align="center"><a href="#" onclick="FacebookPopup(CommentedImageName);"><img src="img/facebook.png" /></a></div>--%>
                     <div id="TopCommentors"></div>
+                    <h4><div align="center">Share with your Facebook friends and let them know who are your biggest Commentors!!</div></h4>
                     <div align="center"><a href="#" onclick="FacebookPopup(CommentedImageName);"><img src="img/facebook.png" /></a></div>
                     
-                    <br />
+                    <br /><br /><br />
 
-                   <%-- <h4><div align="center">These are your top 10 friends who <b>Liked</b> your statuses the most in Facebook.  Share this right now with your friends and let them know who are your stalkers!</div></h4>--%>
+                   
                     <%--<div align="center"><a href="#" onclick="FacebookPopup(LikedImageName);"><img src="img/facebook.png" /></a></div>--%>
                     <div id="TopLikers"></div>
+                    <h4><div align="center">Share with your Facebook friends and let them know who are your biggest Likers!!</div></h4>
                     <div align="center"><a href="#" onclick="FacebookPopup(LikedImageName);"><img src="img/facebook.png" /></a></div>
                     
                     <br /><br /><br />
