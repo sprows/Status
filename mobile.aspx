@@ -574,7 +574,7 @@
                    <%-- <div align="center"><a href="#" onclick="FacebookPopup(CommentedImageName);"><img src="img/facebook.png" /></a></div>--%>
                     <div id="TopCommentors"></div>
                     <h4><div align="center">Share with your Facebook friends and let them know who are your biggest Commentors!!</div></h4>
-                    <div align="center"><a href="#" onclick="FacebookPopup(CommentedImageName);"><img src="img/facebook.png" /></a></div>
+                    <div align="center"><a href="#" style="text-decoration:none" onclick="FacebookPopup(CommentedImageName);"><img src="img/facebook.png" /></a></div>
                     
                     <br /><br /><br />
 
